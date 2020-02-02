@@ -30,7 +30,7 @@ const resolvers = {
     Mutation: {
         deleteUser: combineResolvers(
             isAdmin,
-            async (parent, { id }, { models, me}) => {
+            async (parent, { id }, { models, me }) => {
                 return await models.User.destroy({
                     where: { id },
                 })

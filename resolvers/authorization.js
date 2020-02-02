@@ -26,4 +26,4 @@ const isMessageOwner = async (
     return skip
 }
 
-module.exports = { isAuthenticated, isMessageOwner }
+module.exports = { isAuthenticated, isMessageOwner, isAdmin }
