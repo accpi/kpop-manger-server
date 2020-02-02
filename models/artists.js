@@ -49,7 +49,7 @@ const model = (sequelize, DataTypes) => {
         Model.hasOne(models.VisualSkill),
         Model.hasOne(models.PersonalitySkill),
         Model.hasOne(models.IntangibleSkill),
-        Model.hasOne(models.Birthplace)
+        Model.belongsTo(models.Birthplace)
     }
 
     return Model
