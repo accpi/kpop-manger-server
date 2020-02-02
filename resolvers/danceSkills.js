@@ -49,7 +49,6 @@ const resolvers = {
         ),
         deleteDanceSkill: combineResolvers(
             isAuthenticated,
-            isMessageOwner,
             async (parent, { id }, { models }) => {
                 try {
                     return await models.DanceSkill.destroy({
@@ -64,8 +63,8 @@ const resolvers = {
     },
 
     DanceSkill: {
-        user: async (message, args, { models }) => {
-            return await models.User.findByPk(message.user_id)
+        user: async (danceSkill, args, { models }) => {
+            return await models.Artist.findByPk(danceSkill.artistId)
         }
     },
 }

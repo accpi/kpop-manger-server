@@ -20,7 +20,7 @@ const schema = gql`
         flexibility: Int!
         strength: Int!
         pityTimer: Int!
-        user: User!
+        artist: Artist!
         createdAt: Date!
         updatedAt: Date!
     }
