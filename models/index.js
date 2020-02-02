@@ -16,7 +16,16 @@ const models = {
     Artist: sequelize.import('./artists'),
     Birthplace: sequelize.import('./birthplaces'),
     Group: sequelize.import('./groups'),
-    Trainer: sequelize.import('./trainers'),
+    VocalSkill: sequelize.import('./vocalSkills'),
+    VisualSkill: sequelize.import('./visualSkills'),
+    DanceSkill: sequelize.import('./danceSkills'),
+    PersonalitySkill: sequelize.import('./personalitySkills'),
+    IntangibleSkill: sequelize.import('./intangiblesSkills'),
+    Song: sequelize.import('./songs'),
+    Album: sequelize.import('./albums'),
+    AlbumContribution: sequelize.import('./albumContributions'),
+    LevelHistory: sequelize.import('./levelHistories'),
+    Trainer: sequelize.import('./trainers')
 }
 
 Object.keys(models).forEach(key => {

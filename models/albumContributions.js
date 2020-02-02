@@ -10,8 +10,8 @@ const model = (sequelize, DataTypes) => {
     })
 
     Model.associate = models => {
-        AlbumContribution.belongsTo(models.Album)
-        AlbumContribution.belongsTo(models.Artist)
+        Model.belongsTo(models.Album)
+        Model.belongsTo(models.Artist)
     }
 
     return Model
