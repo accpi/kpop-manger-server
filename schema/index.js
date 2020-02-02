@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express')
 
 const UserSchema = require('./users')
 const MessageSchema = require('./messages')
+const DanceSkillSchema = require('./danceSkills')
 
 const schema = gql`
     scalar Date
@@ -19,4 +20,4 @@ const schema = gql`
     }
 `
 
-module.exports = [schema, UserSchema, MessageSchema]
+module.exports = [schema, UserSchema, MessageSchema, DanceSkillSchema]

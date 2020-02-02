@@ -2,12 +2,12 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        danceSkills: [DanceSkill!]!
+        danceSkills: [DanceSkill]
         danceSkill(id: ID!): DanceSkill
     }
 
     extend type Mutation {
-        createDanceSkill(artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!) : DanceSkill!
+        createDanceSkill(artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!) : DanceSkill
         updateDanceSkill(id: ID!, artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!, pityTimer: Int!): DanceSkill
         deleteDanceSkill(id: ID!): Boolean!
     }
@@ -20,7 +20,7 @@ const schema = gql`
         flexibility: Int!
         strength: Int!
         pityTimer: Int!
-        artist: Artist!
+        user: User!
         createdAt: Date!
         updatedAt: Date!
     }

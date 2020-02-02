@@ -39,13 +39,15 @@ const resolvers = {
 
         signUp: async (
             parent,
-            { username, email, password },
+            { username, email, password, firstName, lastName },
             { models, secret },
         ) => {
             const user = await models.User.create({
                 username,
                 email,
                 password,
+                firstName, 
+                lastName
             })
 
             return { token: createToken(user, secret, '30m') }
