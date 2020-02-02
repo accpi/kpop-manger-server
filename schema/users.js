@@ -8,6 +8,8 @@ const schema = gql`
     }
 
     extend type Mutation {
+        deleteUser(id: ID!): Boolean!
+
         signUp (
             username: String!
             email: String!
@@ -21,6 +23,7 @@ const schema = gql`
         id: ID!
         username: String!
         email: String!
+        role: String
         messages: [Message!]
     }
 
