@@ -4,6 +4,8 @@ const UserSchema = require('./users')
 const MessageSchema = require('./messages')
 
 const schema = gql`
+    scalar Date
+
     type Query {
         _: Boolean
     }
