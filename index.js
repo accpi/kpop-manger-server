@@ -9,8 +9,19 @@ const schema = require('./schema')
 const resolvers = require('./resolvers')
 const { models, sequelize } = require('./models')
 
+const pino = require('pino')
+const logger = pino({ 
+    level: process.env.LOG_LEVEL || 'DEBUG',
+    prettyPrint: true // remove in production
+})
+
+const expressPino = require('express-pino-logger')
+const expressLogger = expressPino({ logger })
+
+
 const app = express()
 app.use(cors())
+app.use(expressLogger)
 
 const getMe = async req => {
     const token = req.headers['x-token']
@@ -43,18 +54,13 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/graphql' })
 
-const eraseDatabaseOnSync = true
-
-sequelize.sync({ force:  eraseDatabaseOnSync }).then(async () => {
-    if (eraseDatabaseOnSync) {
-        createUsersWithMessages(new Date())
-    }
-
+sequelize.sync().then(async () => {
     app.listen({ port: 8000 }, () => {
         console.log('Apollo Server on localhost:8000/graphql')
     })
 })
 
+/*
 const createUsersWithMessages = async date => {
     await models.User.create(
         {
@@ -95,3 +101,4 @@ const createUsersWithMessages = async date => {
         },
     )
 }
+*/

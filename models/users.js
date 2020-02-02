@@ -27,13 +27,30 @@ const user = (sequelize, DataTypes) => {
                 len: [6, 42],
             },
         },
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
         role: {
             type: DataTypes.STRING
         }
     })
 
     User.associate = models => {
-        User.hasMany(models.Message, { onDelete: 'CASCADE' })
+        User.hasMany(models.Message, { onDelete: 'CASCADE' }),
+        User.hasMany(models.Artist, { onDelete: 'CASCADE' }),
+        User.hasMany(models.Group, { onDelete: 'CASCADE' }),
+        User.hasMany(models.Trainer, { onDelete: 'CASCADE' })
     }
 
     User.findByLogin = async login => {
