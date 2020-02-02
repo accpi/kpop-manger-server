@@ -17,7 +17,9 @@ const model = (sequelize, DataTypes) => {
     })
 
     Model.associate = models => {
-        Model.belongsTo(models.User)
+        Model.belongsTo(models.User),
+        Model.hasMany(models.Artist),
+        Model.hasMany(models.Album)
     }
 
     return Model

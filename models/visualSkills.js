@@ -46,6 +46,7 @@ const model = (sequelize, DataTypes) => {
     })
 
     Model.associate = models => {
+        Model.belongsTo(models.Artist)
     }
 
     return Model
