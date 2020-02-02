@@ -1,0 +1,28 @@
+{
+  "name": "kpop-manager-server",
+  "version": "1.0.0",
+  "description": "Apollo / PostGreSQL",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-server": "^2.9.16",
+    "apollo-server-express": "^2.9.16",
+    "bcrypt": "^3.0.7",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.1",
+    "sequelize": "^5.21.3",
+    "uuid": "^3.4.0",
+    "uuidv4": "^6.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "accpi",
+  "license": "ISC"
+}
