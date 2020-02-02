@@ -63,9 +63,11 @@ const resolvers = {
     },
 
     DanceSkill: {
+        /*
         user: async (danceSkill, args, { models }) => {
             return await models.Artist.findByPk(danceSkill.artistId)
         }
+        */
     },
 }
 
