@@ -1,10 +1,10 @@
 require('dotenv').config()
 
 // SERVER DEPENDANCIES
-const jwt = require('jsonwebtoken')
 const express = require('express')
 const cors = require('cors')
 const { ApolloServer } = require('apollo-server-express')
+const jwt = require('jsonwebtoken')
 // END SERVER DEPENDANCIES
 
 // APOLLO
@@ -13,11 +13,11 @@ const resolvers = require('./resolvers')
 const dataSources = require('./models')
 // END APOLLO
 
+
 const app = express()
 app.use(cors())
 
 // LOGGING
-/*
 const pino = require('pino')
 const logger = pino({ 
     level: process.env.LOG_LEVEL || 'DEBUG',
@@ -26,8 +26,7 @@ const logger = pino({
 
 const expressPino = require('express-pino-logger')
 const expressLogger = expressPino({ logger })
-app.use(expressLogger)
-*/
+//app.use(expressLogger)
 // END LOGGING
 
 
@@ -39,7 +38,9 @@ const getMe = async req => {
             return await jwt.verify(token, process.env.JWT_SECRET)
         }
         catch (error) {
-
+            throw new Error(
+                'Your session has expired. Sign in again.'
+            )
         }
     }
 }
