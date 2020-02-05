@@ -8,4 +8,4 @@ const userResolvers = require('./users')
 const messageResolvers = require('./messages')
 const danceSkillResolvers = require('./danceSkills')
 
-module.exports = [customScalarResolver, userResolvers, messageResolvers, danceSkillResolvers]
+module.exports = [customScalarResolver, userResolvers]

@@ -12,21 +12,22 @@ const createToken = async (user, secret, expiresIn) => {
 
 const resolvers = {
     Query: {
-        users: async (parent, args, { models }) => {
-            return await models.User.findAll()
+        users: async (parent, args, { dataSources }) => {
+            return await dataSources.UserAPI.getAll()
         },
-        user: async (parent, { id }) => {
-            return await models.User.findByPk(id)
+        user: async (parent, { id }, { dataSources }) => {
+            return await dataSources.UserAPI.getByID({ id })
         },
 
-        me: async (parent, args, { me }) => {
+        me: async (parent, args, { dataSources, me }) => {
             if (!me) {
                 return null
             }
-            return await models.User.findByPk(me.id)
+            return await models.UserAPI.getByID(me.id)
         },
     },
 
+    /*
     Mutation: {
         deleteUser: combineResolvers(
             isAdmin,
@@ -87,6 +88,7 @@ const resolvers = {
             })
         }
     },
+    */
 }
 
 module.exports = resolvers

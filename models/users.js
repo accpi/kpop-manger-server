@@ -1,85 +1,62 @@
-const bcrypt = require('bcrypt')
+const { pool } = require('../db_config')
 
-const user = (sequelize, DataTypes) => {
-    const User = sequelize.define('user', {
-        username: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-            },
-        },
-        email: {
-            type: DataTypes.STRING,
-            unique: true,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-                isEmail: true,
-            },
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-                len: [6, 42],
-            },
-        },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
-        },
-        role: {
-            type: DataTypes.STRING
+class UserAPI {
+	async getAll() {
+        try {
+            const res = await pool.query(`
+                                            SELECT *
+                                            FROM users
+                                            ORDER BY id ASC
+                                        `)
+            return res.rows
+        } catch (error) {
+            console.log(error.stack)
         }
-    })
 
-    User.associate = models => {
-        User.hasMany(models.Message, { onDelete: 'CASCADE' }),
-        User.hasMany(models.Artist, { onDelete: 'CASCADE' }),
-        User.hasMany(models.Group, { onDelete: 'CASCADE' }),
-        User.hasMany(models.Trainer, { onDelete: 'CASCADE' })
     }
 
-    User.findByLogin = async login => {
-        let user = await User.findOne({
-            where: { username: login },
-        })
-
-        if (!user) {
-            user = await User.findOne({
-                where: { email: login },
-            })
+    async getByID({ id }) {
+        try {
+            const res = await pool.query(`
+                                            SELECT *
+                                            FROM users
+                                            WHERE id = $1
+                                            ORDER BY id ASC
+                                        `, 
+                                        [id]
+                                        )
+                                        
+            return res.rows[0]
+        } catch (error) {
+            console.log(error.stack)
         }
-        return user
+
     }
-
-    User.beforeCreate(async user => {
-        user.password = await user.generatePasswordHash()
-    })
-
-    User.prototype.generatePasswordHash = async function() {
+    
+    /*
+    UserAPI.prototype.generatePasswordHash = async function() {
         const saltRounds = 10
         return await bcrypt.hash(this.password, saltRounds)
     }
 
-    User.prototype.validatePassword = async function (password) {
+    UserAPI.prototype.validatePassword = async function (password) {
         return await bcrypt.compare(password, this.password)
     }
+    */
 
-    return User
+    userReducer(user) {
+        return {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        }
+    }
 }
 
-module.exports = user
+module.exports = UserAPI

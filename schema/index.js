@@ -20,4 +20,4 @@ const schema = gql`
     }
 `
 
-module.exports = [schema, UserSchema, MessageSchema, DanceSkillSchema]
+module.exports = [schema, UserSchema]

@@ -1,14 +1,22 @@
 require('dotenv').config()
 
-const jwt = require('jsonwebtoken')
+// SERVER DEPENDANCIES
 const express = require('express')
 const cors = require('cors')
-const { ApolloServer, AuthenticationError } = require('apollo-server-express')
+const { ApolloServer } = require('apollo-server-express')
+// END SERVER DEPENDANCIES
 
+// APOLLO
 const schema = require('./schema')
 const resolvers = require('./resolvers')
-const { models, sequelize } = require('./models')
+const dataSources = require('./models')
+// END APOLLO
 
+
+const app = express()
+app.use(cors())
+
+// LOGGING
 const pino = require('pino')
 const logger = pino({ 
     level: process.env.LOG_LEVEL || 'DEBUG',
@@ -17,12 +25,11 @@ const logger = pino({
 
 const expressPino = require('express-pino-logger')
 const expressLogger = expressPino({ logger })
+//app.use(expressLogger)
+// END LOGGING
 
 
-const app = express()
-app.use(cors())
-app.use(expressLogger)
-
+/*
 const getMe = async req => {
     const token = req.headers['x-token']
 
@@ -37,28 +44,35 @@ const getMe = async req => {
         }
     }
 }
+*/
+
+const context = async ({ req }) => {
+    return  {
+        id: 3,
+        secret: process.env.JWT_SECRET
+    }
+}
 
 const server = new ApolloServer({
     typeDefs: schema,
     resolvers,
-    context: async ({ req }) => {
-        const me = await getMe(req)
-
-        return {
-            models,
-            me,
-            secret: process.env.JWT_SECRET
-        }
-    }
+    dataSources,
+    context, 
 })
 
 server.applyMiddleware({ app, path: '/graphql' })
 
+app.listen({ port: 8000 }, () => {
+    console.log('Apollo Server on localhost:8000/graphql')
+})
+
+/*
 sequelize.sync().then(async () => {
     app.listen({ port: 8000 }, () => {
         console.log('Apollo Server on localhost:8000/graphql')
     })
 })
+*/
 
 /*
 const createUsersWithMessages = async date => {

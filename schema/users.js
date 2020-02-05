@@ -28,7 +28,6 @@ const schema = gql`
         firstName: String!
         lastName: String!
         role: String
-        messages: [Message!]
     }
 
     type Token {
