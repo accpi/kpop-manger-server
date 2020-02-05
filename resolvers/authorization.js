@@ -7,23 +7,13 @@ const isAuthenticated = (parent, args, { me }) =>
 const isAdmin = combineResolvers(
     isAuthenticated,
     (parent, args, { me: { role } }) => {
-        role === 'ADMIN'
-            ? skip
-            : new ForbiddenError('Not authorized as admin.')
+        if (role === 'ADMIN') {
+            return skip
+        }
+        else {
+            return new ForbiddenError('Not authorized as admin')
+        }
     }
 )
 
-const isMessageOwner = async (
-    parent,
-    { id },
-    { models, me },
-) => {
-    const message = await models.Message.findByPk(id, { raw: true })
-    if (message.userId !== me.id) {
-        throw new ForbiddenError('Not authenticated as owner.')
-    }
-
-    return skip
-}
-
-module.exports = { isAuthenticated, isMessageOwner, isAdmin }
+module.exports = { isAuthenticated, isAdmin }

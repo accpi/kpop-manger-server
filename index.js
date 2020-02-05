@@ -18,6 +18,7 @@ const app = express()
 app.use(cors())
 
 // LOGGING
+/*
 const pino = require('pino')
 const logger = pino({ 
     level: process.env.LOG_LEVEL || 'DEBUG',
@@ -26,7 +27,8 @@ const logger = pino({
 
 const expressPino = require('express-pino-logger')
 const expressLogger = expressPino({ logger })
-//app.use(expressLogger)
+app.use(expressLogger)
+*/
 // END LOGGING
 
 
@@ -64,54 +66,3 @@ server.applyMiddleware({ app, path: '/graphql' })
 app.listen({ port: 8000 }, () => {
     console.log('Apollo Server on localhost:8000/graphql')
 })
-
-/*
-sequelize.sync().then(async () => {
-    app.listen({ port: 8000 }, () => {
-        console.log('Apollo Server on localhost:8000/graphql')
-    })
-})
-*/
-
-/*
-const createUsersWithMessages = async date => {
-    await models.User.create(
-        {
-            username: 'foo',
-            email: 'foo@email.com',
-            password: 'foo123456',
-            role: 'ADMIN',
-            messages: [
-                {
-                    text: 'message 1a',
-                    createdAt: date.setSeconds(date.getSeconds() + 1)
-                },
-            ],
-        },
-        {
-            include: [models.Message]
-        }
-    )
-
-    await models.User.create(
-        {
-            username: 'bar',
-            email: 'bar@email.com',
-            password: 'bar123456',
-            messages: [
-                {
-                    text: 'message 2a',
-                    createdAt: date.setSeconds(date.getSeconds() + 1)
-                },
-                {
-                    text: 'message 2b',
-                    createdAt: date.setSeconds(date.getSeconds() + 1)
-                },
-            ],
-        },
-        {
-            include: [models.Message],
-        },
-    )
-}
-*/

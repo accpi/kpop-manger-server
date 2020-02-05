@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const { combineResolvers } = require('graphql-resolvers')
 
+const { combineResolvers } = require('graphql-resolvers')
 const { isAdmin } = require('./authorization')
 
 const createToken = async (user, secret, expiresIn) => {
@@ -64,15 +64,17 @@ const resolvers = {
             return { token: createToken(user, secret, '30m') }
         },
 
-        deleteUser: async (
-            _,
-            { username },
-            { dataSources, secret },
-        ) => {
-            return await dataSources.UserAPI.delete({
-                username
+        deleteUser: combineResolvers(
+            isAdmin,
+            async (
+                    _,
+                    { username },
+                    { dataSources },
+                ) => {
+                    return await dataSources.UserAPI.delete({
+                        username
             })
-        },
+        }),
 
         loginUser: async (
             _,
