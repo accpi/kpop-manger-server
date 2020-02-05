@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const { combineResolvers } = require('graphql-resolvers')
 
 const { isAdmin } = require('./authorization')
@@ -12,19 +13,90 @@ const createToken = async (user, secret, expiresIn) => {
 
 const resolvers = {
     Query: {
-        users: async (parent, args, { dataSources }) => {
-            return await dataSources.UserAPI.getAll()
+        users: async (_, args, { dataSources }) => {
+            return await dataSources.UserAPI.get()
         },
-        user: async (parent, { id }, { dataSources }) => {
+        user: async (_, { id }, { dataSources }) => {
             return await dataSources.UserAPI.getByID({ id })
         },
 
-        me: async (parent, args, { dataSources, me }) => {
+        me: async (_, args, { dataSources, me }) => {
             if (!me) {
                 return null
             }
-            return await models.UserAPI.getByID(me.id)
+            else {
+                var id = me.id
+                return await dataSources.UserAPI.getByID({ id })
+            }
         },
+    },
+
+    Mutation: {
+        postUser: async (
+            _,
+            { username, email, password, firstName, lastName },
+            { dataSources, secret },
+        ) => {
+            const user = await dataSources.UserAPI.post({
+                username,
+                email,
+                password,
+                firstName, 
+                lastName
+            })
+
+            return { token: createToken(user, secret, '30m') }
+        },
+
+        updateUser: async (
+            _,
+            { username, email, password, firstName, lastName },
+            { dataSources, secret },
+        ) => {
+            const user = await dataSources.UserAPI.update({
+                username,
+                email,
+                password,
+                firstName, 
+                lastName
+            })
+
+            return { token: createToken(user, secret, '30m') }
+        },
+
+        deleteUser: async (
+            _,
+            { username },
+            { dataSources, secret },
+        ) => {
+            return await dataSources.UserAPI.delete({
+                username
+            })
+        },
+
+        loginUser: async (
+            _,
+            { email, password },
+            { dataSources, secret },
+        ) => {
+            const user = await dataSources.UserAPI.login({ email })
+
+            if(!user) {
+                throw new Error(
+                    'No user found with those login credentials.'
+                )
+            }
+
+            const isValid = await validatePassword(password, user.password)
+
+            if(!isValid) {
+                throw new Error(
+                    'Invalid password.'
+                )
+            }
+
+            return { token: createToken(user, secret, '30m') }
+        }
     },
 
     /*
@@ -38,45 +110,6 @@ const resolvers = {
             }
         ),
 
-        signUp: async (
-            parent,
-            { username, email, password, firstName, lastName },
-            { models, secret },
-        ) => {
-            const user = await models.User.create({
-                username,
-                email,
-                password,
-                firstName, 
-                lastName
-            })
-
-            return { token: createToken(user, secret, '30m') }
-        },
-
-        signIn: async (
-            parent,
-            { login, password },
-            { models, secret },
-        ) => {
-            const user = await models.User.findByLogin(login)
-
-            if(!user) {
-                throw new UserInputError(
-                    'No user found with those login credentials'
-                )
-            }
-
-            const isValid = await user.validatePassword(password)
-
-            if(!isValid) {
-                throw new AuthenticationError(
-                    'Invalid password'
-                )
-            }
-
-            return { token: createToken(user, secret, '30m') }
-        }
     },
 
     User: {
@@ -89,6 +122,10 @@ const resolvers = {
         }
     },
     */
+}
+
+async function validatePassword(inputPass, storedPass) {
+    return await bcrypt.compare(inputPass, storedPass)
 }
 
 module.exports = resolvers

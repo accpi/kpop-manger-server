@@ -5,7 +5,5 @@ const customScalarResolver = {
 }
 
 const userResolvers = require('./users')
-const messageResolvers = require('./messages')
-const danceSkillResolvers = require('./danceSkills')
 
 module.exports = [customScalarResolver, userResolvers]
