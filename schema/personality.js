@@ -7,7 +7,7 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createPersonalitySkill(artistId: ID!, funny: Int!, cuteness: Int!, charisma: Int!, outgoing: Int!, pleasant: Int!) : PersonalitySkill!
+        createPersonalitySkill(artistId: ID!, funny: Int!, cuteness: Int!, charisma: Int!, outgoing: Int!, pleasant: Int!): PersonalitySkill!
         updatePersonalitySkill(id: ID!, artistId: ID!, funny: Int!, cuteness: Int!, charisma: Int!, outgoing: Int!, pleasant: Int!, pityTimer: Int!): PersonalitySkill
         deletePersonalitySkill(id: ID!): Boolean!
     }
@@ -19,10 +19,8 @@ const schema = gql`
         charisma: Int!
         outgoing: Int!
         pleasant: Int!
-        pityTimer: Int!
+        pity_timer: Int!
         artist: Artist!
-        createdAt: Date!
-        updatedAt: Date!
     }
 `
 

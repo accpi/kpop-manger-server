@@ -7,17 +7,15 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createBirthplace(artistId: ID!, name: String!) : Birthplace!
-        updateBirthplace(id: ID!, Country: String!, City: String!): Birthplace
+        createBirthplace(artist_id: ID!, country: String!, city: String!): Birthplace!
+        updateBirthplace(id: ID!, country: String!, city: String!): Birthplace
         deleteBirthplace(id: ID!): Boolean!
     }
     
     type Birthplace {
         id: ID!
-        Country: String!
-        City: String!
-        createdAt: Date!
-        updatedAt: Date!
+        country: String!
+        city: String!
     }
 `
 

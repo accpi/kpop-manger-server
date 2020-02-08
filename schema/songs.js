@@ -7,7 +7,7 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createSong(name: String!, albumId: ID!) : Song!
+        createSong(name: String!, albumId: ID!): Song!
         updateSong(id: ID!, name: String!, albumId: ID!): Song
         deleteSong(id: ID!): Boolean!
     }
@@ -15,10 +15,7 @@ const schema = gql`
     type Song {
         id: ID!
         name: String!
-        albumId: ID!
-        album: [Album]
-        createdAt: Date!
-        updatedAt: Date!
+        album: Album
     }
 `
 

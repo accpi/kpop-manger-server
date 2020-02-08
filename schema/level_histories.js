@@ -7,17 +7,15 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createLevelHistory(artistId: ID!, points: Int!) : LevelHistory!
+        createLevelHistory(artistId: ID!, points: Int!): LevelHistory!
         updateLevelHistory(id: ID!, artistId: ID!, points: Int!): LevelHistory
         deleteLevelHistory(id: ID!): Boolean!
     }
     
     type LevelHistory {
         id: ID!
-        points: Int!
+        level: Int!
         artist: Artist!
-        createdAt: Date!
-        updatedAt: Date!
     }
 `
 

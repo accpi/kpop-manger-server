@@ -7,7 +7,7 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createVocalSkill(artistId: ID!, breathing: Int!, diction: Int!, range: Int!, control: Int!, empathy: Int!) : VocalSkill!
+        createVocalSkill(artistId: ID!, breathing: Int!, diction: Int!, range: Int!, control: Int!, empathy: Int!): VocalSkill!
         updateVocalSkill(id: ID!, artistId: ID!, breathing: Int!, diction: Int!, range: Int!, control: Int!, empathy: Int!, pityTimer: Int!): VocalSkill
         deleteVocalSkill(id: ID!): Boolean!
     }
@@ -19,10 +19,8 @@ const schema = gql`
         range: Int!
         control: Int!
         empathy: Int!
-        pityTimer: Int!
+        pity_timer: Int!
         artist: Artist!
-        createdAt: Date!
-        updatedAt: Date!
     }
 `
 

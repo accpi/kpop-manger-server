@@ -7,7 +7,7 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createDanceSkill(artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!) : DanceSkill
+        createDanceSkill(artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!): DanceSkill
         updateDanceSkill(id: ID!, artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!, pityTimer: Int!): DanceSkill
         deleteDanceSkill(id: ID!): Boolean!
     }

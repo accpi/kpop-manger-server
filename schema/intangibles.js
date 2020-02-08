@@ -7,7 +7,7 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createIntangibleSkill(artistId: ID!, stamina: Int!, morale: Int!, songwriting: Int!, composition: Int!, choreography: Int!) : IntangibleSkill!
+        createIntangibleSkill(artistId: ID!, stamina: Int!, morale: Int!, songwriting: Int!, composition: Int!, choreography: Int!): IntangibleSkill!
         updateIntangibleSkill(id: ID!, artistId: ID!, stamina: Int!, morale: Int!, songwriting: Int!, composition: Int!, choreography: Int!, pityTimer: Int!): IntangibleSkill
         deleteIntangibleSkill(id: ID!): Boolean!
     }
@@ -19,10 +19,8 @@ const schema = gql`
         songwriting: Int!
         composition: Int!
         choreography: Int!
-        pityTimer: Int!
+        pity_timer: Int!
         artist: Artist!
-        createdAt: Date!
-        updatedAt: Date!
     }
 `
 

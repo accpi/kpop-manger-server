@@ -8,20 +8,22 @@ const schema = gql`
     }
 
     extend type Mutation {
-        postUser (
+        createUser (
             username: String!
             email: String!
             password: String!
-            firstName: String!
-            lastName: String!
+            first_name: String!
+            last_name: String!
+            role: String!
         ): Token!
 
         updateUser (
             username: String!
             email: String!
             password: String!
-            firstName: String!
-            lastName: String!
+            first_name: String!
+            last_name: String!
+            role: String!
         ): Token!
 
         deleteUser(username: String!): User
@@ -33,15 +35,22 @@ const schema = gql`
         id: ID!
         username: String!
         email: String!
-        firstName: String!
-        lastName: String!
-        role: String
+        first_name: String!
+        last_name: String!
+        role: String!
+        visuals: Visuals
+        vocals: Vocals
+        personality: Personality
+        dance: Dance
+        intangibles: Intangibles
+        artists: [Artist]
+        groups: [Group]
+        trainers: [Trainers]
     }
 
     type Token {
         token: String!
     }
-
 `
 
 module.exports = schema

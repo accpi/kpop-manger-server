@@ -2,23 +2,41 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        albumContributions: [AlbumContribution!]!
+        albumContributions: [AlbumContribution]
         albumContribution(id: ID!): AlbumContribution
     }
 
     extend type Mutation {
-        createAlbumContribution(artistId: ID!, albumId: ID!, points: Int!) : AlbumContribution!
-        updateAlbumContribution(id: ID!, artistId: ID!, albumId: ID!, points: Int!): AlbumContribution
+        createAlbumContribution(
+            artist_id: ID!, 
+            album_id: ID!, 
+            visuals: Int!,
+            vocals: Int!,
+            dance: Int!, 
+            personality: Int!
+        ): AlbumContribution
+
+        updateAlbumContribution(
+            id: ID!,
+            artist_id: ID!, 
+            album_id: ID!, 
+            visuals: Int!,
+            vocals: Int!,
+            dance: Int!, 
+            personality: Int!
+        ): AlbumContribution
+        
         deleteAlbumContribution(id: ID!): Boolean!
     }
     
     type AlbumContribution {
         id: ID!
-        points: Int!
+        visuals: Int!
+        vocals: Int!
+        dance: Int!
+        personality: Int!
         artist: Artist!
         album: Album!
-        createdAt: Date!
-        updatedAt: Date!
     }
 `
 

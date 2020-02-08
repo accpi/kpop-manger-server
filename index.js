@@ -52,10 +52,9 @@ const server = new ApolloServer({
     resolvers,
     dataSources,
     context: async ({ req }) => {
-        const me = await getMe(req)
+        // const me = await getMe(req)
     
         return  {
-            me,
             secret: process.env.JWT_SECRET
         }
     }, 

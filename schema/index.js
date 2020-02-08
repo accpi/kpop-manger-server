@@ -1,8 +1,24 @@
 const { gql } = require('apollo-server-express')
 
-const UserSchema = require('./users')
-const MessageSchema = require('./messages')
-const DanceSkillSchema = require('./danceSkills')
+const Users = require('./users')
+const Groups = require('./groups')
+const Albums = require('./albums')
+const Artists = require('./artists')
+const Birthplaces = require('./birthplaces')
+/*
+
+
+
+const DanceSkills = require('./danceSkills')
+const IntangibleSkills = require('./intangiblesSkills')
+const LevelHistories = require('./levelHistories')
+const PersonalitySkills = require('./personalitySkills')
+const Songs = require('./songs')
+const Trainers = require('./trainers')
+const VisualSkills = require('./visualSkills')
+const VocalSkills = require('./vocalSkills')
+
+*/
 
 const schema = gql`
     scalar Date
@@ -20,4 +36,11 @@ const schema = gql`
     }
 `
 
-module.exports = [schema, UserSchema]
+module.exports = [
+    schema,
+    Users,
+    Groups,
+    Albums,
+    Artists,
+    Birthplaces
+]

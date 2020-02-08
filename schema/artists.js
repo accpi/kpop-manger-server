@@ -7,7 +7,7 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createArtist(firstName: String!, lastName: String!, stageName: String!, birthday: String!, sex: String!, birthplace: ID!) : Artist!
+        createArtist(firstName: String!, lastName: String!, stageName: String!, birthday: String!, sex: String!, birthplace: ID!): Artist!
         updateArtist(id: ID!, firstName: String!, lastName: String!, stageName: String!, birthday: String!, sex: String!, birthplace: ID!): Artist
         deleteArtist(id: ID!): Boolean!
     }
@@ -19,17 +19,16 @@ const schema = gql`
         stageName: String!
         birthday: Date!
         sex: String!
+        exp: Int!
         birthplace: Birthplace
-        vocalSkill: VocalSkill
-        visualSkill: VisualSkill
-        danceSKill: DanceSkill
-        personalitySkill: PersonalitySkill
-        intangibleSkill: IntangiblesSkill
-        levelHistory: [LevelHistory]
+        vocals: Vocals
+        visuals: Visuals
+        dance: Dance
+        personality: Personality
+        intangibles: Intangibles
+        level_histories: [LevelHistory]
         albumContributions: [AlbumContribution]
         user: User!
-        createdAt: Date!
-        updatedAt: Date!
     }
 `
 

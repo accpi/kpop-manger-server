@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 const { combineResolvers } = require('graphql-resolvers')
-const { isAdmin } = require('./authorization')
+const { isAuthenticated, isAdmin } = require('./authorization')
 
 const createToken = async (user, secret, expiresIn) => {
     const { id, email, username, role } = user
@@ -32,36 +32,39 @@ const resolvers = {
     },
 
     Mutation: {
-        postUser: async (
+        createUser: async (
             _,
-            { username, email, password, firstName, lastName },
+            { username, email, password, first_name, last_name, role },
             { dataSources, secret },
         ) => {
             const user = await dataSources.UserAPI.post({
                 username,
                 email,
                 password,
-                firstName, 
-                lastName
+                first_name, 
+                last_name,
+                role,
             })
 
-            return { token: createToken(user, secret, '30m') }
+            return { token: createToken(user, secret, '6h') }
         },
 
         updateUser: async (
             _,
-            { username, email, password, firstName, lastName },
+            { id, username, email, password, first_name, last_name, role },
             { dataSources, secret },
         ) => {
             const user = await dataSources.UserAPI.update({
+                id,
                 username,
                 email,
                 password,
-                firstName, 
-                lastName
+                first_name, 
+                last_name,
+                role,
             })
 
-            return { token: createToken(user, secret, '30m') }
+            return { token: createToken(user, secret, '6h') }
         },
 
         deleteUser: combineResolvers(
@@ -97,23 +100,11 @@ const resolvers = {
                 )
             }
 
-            return { token: createToken(user, secret, '30m') }
+            return { token: createToken(user, secret, '6h') }
         }
     },
 
     /*
-    Mutation: {
-        deleteUser: combineResolvers(
-            isAdmin,
-            async (parent, { id }, { models, me }) => {
-                return await models.User.destroy({
-                    where: { id },
-                })
-            }
-        ),
-
-    },
-
     User: {
         messages: async (user, args, { models }) => {
             return await models.Message.findAll({
