@@ -9,24 +9,25 @@ const schema = gql`
 
     extend type Mutation {
         createUser (
-            username: String!
-            email: String!
-            password: String!
-            first_name: String!
-            last_name: String!
-            role: String!
+            username: String!,
+            email: String!,
+            password: String!,
+            first_name: String!,
+            last_name: String!,
+            role: String,
         ): Token!
 
         updateUser (
-            username: String!
-            email: String!
-            password: String!
-            first_name: String!
-            last_name: String!
-            role: String!
+            id: ID!,
+            username: String!,
+            email: String!,
+            password: String!,
+            first_name: String!,
+            last_name: String!,
+            role: String
         ): Token!
 
-        deleteUser(username: String!): User
+        deleteUser(id: ID!): User
 
         loginUser(email: String!, password: String!): Token!
     }
@@ -45,7 +46,7 @@ const schema = gql`
         intangibles: Intangibles
         artists: [Artist]
         groups: [Group]
-        trainers: [Trainers]
+        trainers: [Trainer]
     }
 
     type Token {

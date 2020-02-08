@@ -1,12 +1,11 @@
 const { pool } = require('../db_config')
-const bcrypt = require('bcrypt')
 
 class API {
 	async get() {
         try {
             const result = await pool.query(`
                 SELECT *
-                FROM users
+                FROM albums
                 ORDER BY id ASC
             `)
 
@@ -22,7 +21,7 @@ class API {
         try {
             const result = await pool.query(`
                 SELECT *
-                FROM users
+                FROM albums
                 WHERE id = $1
                 `, 
                 [id]
@@ -36,14 +35,14 @@ class API {
         }
     }
 
-    async post({ username, email, password, first_name, last_name, role }) {
+    async post({ group_id, name, genre, style }) {
         try {
             const result = await pool.query(`
-                INSERT INTO users (username, email, password, first_name, last_name, role)
-                VALUES ($1, $2, $3, $4, $5)
+                INSERT INTO albums (group_id, name, genre, style)
+                VALUES ($1, $2, $3, $4)
                 RETURNING *
                 `, 
-                [username, email, await generatePasswordHash(password), first_name, last_name, role]
+                [group_id, name, genre, style]
             )
             
             return result.rows
@@ -54,15 +53,15 @@ class API {
         }
     }
 
-    async update({ id, username, email, password, first_name, last_name, role }) {
+    async update({ id, group_id, name, genre, style }) {
         try {
             const result = await pool.query(`
-                UPDATE users
-                SET (username, email, password, first_name, last_name, role, modified_date) = ($2, $3, $4, $5, $6, $7, (to_timestamp(${Date.now()} / 1000.0)))
+                UPDATE albums
+                SET (group_id, name, genre, style, modified_date) = ($2, $3, $4, $5, (to_timestamp(${Date.now()} / 1000.0)))
                 WHERE id = $1
                 RETURNING *
                 `, 
-                [id, username, email, await generatePasswordHash(password), first_name, last_name, role]
+                [id, group_id, name, genre, style]
             )
             
             return result.rows
@@ -76,7 +75,7 @@ class API {
     async delete({ id }) {
         try {
             const result = await pool.query(`
-                DELETE FROM users
+                DELETE FROM albums
                 WHERE id = $1
                 RETURNING *
                 `, 
@@ -90,28 +89,6 @@ class API {
             console.log(error.stack)
         }
     }
-
-    async login({ email }) {
-        try {
-            const result = await pool.query(`
-                SELECT *
-                FROM users
-                WHERE email = $1
-                `, 
-                [email]
-            )
-            
-            return result.rows
-                    ? result.rows[0]
-                    : []
-        } catch (error) {
-            console.log(error.stack)
-        }
-    }
-}
-
-async function generatePasswordHash(password) {
-    return await bcrypt.hash(password, 10)
 }
 
 module.exports = API

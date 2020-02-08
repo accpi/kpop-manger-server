@@ -2,8 +2,8 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        intangibles: [IntangibleSkill]
-        intangible(id: ID!): IntangibleSkill
+        intangibles: [Intangibles]
+        intangible(id: ID!): Intangibles
     }
 
     extend type Mutation {

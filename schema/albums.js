@@ -8,14 +8,18 @@ const schema = gql`
 
     extend type Mutation {
         createAlbum(
-            artist_id: ID!, 
-            name: String!
+            group_id: ID!, 
+            name: String!,
+            genre: String!,
+            style: String
         ): Album!
 
         updateAlbum(
             id: ID!, 
-            artist_id: ID!, 
-            name: String!
+            group_id: ID!, 
+            name: String!,
+            genre: String!,
+            style: String
         ): Album!
 
         deleteAlbum(
@@ -28,7 +32,7 @@ const schema = gql`
         name: String!
         genre: String!
         style: String!
-        artist: Artist!
+        group: Group!
     }
 `
 

@@ -13,7 +13,7 @@ const schema = gql`
             dance: Int!, 
             vocals: Int!, 
             visuals: Int!, 
-            personality!: Int!
+            personality: Int!
         ): Trainer!
         
         updateTrainer(
@@ -22,7 +22,7 @@ const schema = gql`
             dance: Int!, 
             vocals: Int!, 
             visuals: Int!, 
-            personality!: Int!
+            personality: Int!
         ): Trainer!
         
         deleteTrainer(
