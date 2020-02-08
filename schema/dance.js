@@ -2,27 +2,44 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        danceSkills: [DanceSkill]
-        danceSkill(id: ID!): DanceSkill
+        dances: [Dance]
+        dance(id: ID!): Dance
     }
 
     extend type Mutation {
-        createDanceSkill(artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!): DanceSkill
-        updateDanceSkill(id: ID!, artistId: ID!, balance: Int!, posture: Int!, coordination: Int!, flexibility: Int!, strength: Int!, pityTimer: Int!): DanceSkill
-        deleteDanceSkill(id: ID!): Boolean!
+        createDance(
+            artist_id: ID!, 
+            balance: Int!, 
+            posture: Int!, 
+            coordination: Int!, 
+            flexibility: Int!, 
+            strength: Int!
+        ): Dance!
+
+        updateDance(
+            id: ID!, 
+            artist_id: ID!, 
+            balance: Int!, 
+            posture: Int!, 
+            coordination: Int!, 
+            flexibility: Int!, 
+            strength: Int!, 
+            pity_timer: Int!
+        ): Dance!
+        
+        deleteDance(
+            id: ID!
+        ): Dance!
     }
     
-    type DanceSkill {
+    type Dance {
         id: ID!
         balance: Int!
         posture: Int!
         coordination: Int!
         flexibility: Int!
         strength: Int!
-        pityTimer: Int!
-        
-        createdAt: Date!
-        updatedAt: Date!
+        pity_timer: Int!
     }
 `
 

@@ -14,7 +14,7 @@ const schema = gql`
             vocals: Int!,
             dance: Int!, 
             personality: Int!
-        ): AlbumContribution
+        ): AlbumContribution!
 
         updateAlbumContribution(
             id: ID!,
@@ -24,9 +24,11 @@ const schema = gql`
             vocals: Int!,
             dance: Int!, 
             personality: Int!
-        ): AlbumContribution
+        ): AlbumContribution!
         
-        deleteAlbumContribution(id: ID!): Boolean!
+        deleteAlbumContribution(
+            id: ID!
+        ): AlbumContribution!
     }
     
     type AlbumContribution {

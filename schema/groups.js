@@ -7,17 +7,28 @@ const schema = gql`
     }
 
     extend type Mutation {
-        createGroup(name: String!, fanName: String!): Group
-        updateGroup(id: ID!, name: String!, fanName: String!): Group
-        deleteGroup(id: ID!): Group
+        createGroup(
+            name: String!, 
+            fan_name: String!
+        ): Group!
+
+        updateGroup(
+            id: ID!, 
+            name: String!, 
+            fan_name: String!
+        ): Group
+        
+        deleteGroup(
+            id: ID!
+        ): Group
     }
     
     type Group {
         id: ID!
         name: String!
         fan_name: String!
-        fans: Int
-        popularity: Int
+        fans: Int!
+        popularity: Int!
         albums: [Album]
         artists: [Artist]
         user: User!

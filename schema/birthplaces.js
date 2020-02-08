@@ -2,14 +2,25 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        birthplaces: [Birthplace!]!
+        birthplaces: [Birthplace]
         birthplace(id: ID!): Birthplace
     }
 
     extend type Mutation {
-        createBirthplace(artist_id: ID!, country: String!, city: String!): Birthplace!
-        updateBirthplace(id: ID!, country: String!, city: String!): Birthplace
-        deleteBirthplace(id: ID!): Boolean!
+        createBirthplace( 
+            country: String!, 
+            city: String!
+        ): Birthplace!
+
+        updateBirthplace(
+            id: ID!, 
+            country: String!, 
+            city: String!
+        ): Birthplace!
+
+        deleteBirthplace(
+            id: ID!
+        ): Birthplace!
     }
     
     type Birthplace {

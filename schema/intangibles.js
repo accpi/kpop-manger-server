@@ -2,17 +2,37 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        intangibleSkills: [IntangibleSkill!]!
-        intangibleSkill(id: ID!): IntangibleSkill
+        intangibles: [IntangibleSkill]
+        intangible(id: ID!): IntangibleSkill
     }
 
     extend type Mutation {
-        createIntangibleSkill(artistId: ID!, stamina: Int!, morale: Int!, songwriting: Int!, composition: Int!, choreography: Int!): IntangibleSkill!
-        updateIntangibleSkill(id: ID!, artistId: ID!, stamina: Int!, morale: Int!, songwriting: Int!, composition: Int!, choreography: Int!, pityTimer: Int!): IntangibleSkill
-        deleteIntangibleSkill(id: ID!): Boolean!
+        createIntangibles(
+            artist_id: ID!, 
+            stamina: Int!, 
+            morale: Int!, 
+            songwriting: Int!, 
+            composition: Int!, 
+            choreography: Int!
+        ): Intangibles!
+        
+        updateIntangibles(
+            id: ID!, 
+            artist_id: ID!, 
+            stamina: Int!, 
+            morale: Int!, 
+            songwriting: Int!, 
+            composition: Int!, 
+            choreography: Int!, 
+            pity_timer: Int!
+        ): Intangibles!
+        
+        deleteIntangibles(
+            id: ID!
+        ): Intangibles!
     }
     
-    type IntangibleSkill {
+    type Intangibles {
         id: ID!
         stamina: Int!
         morale: Int!

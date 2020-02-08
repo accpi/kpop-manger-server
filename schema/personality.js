@@ -2,17 +2,37 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        personalitySkills: [PersonalitySkill!]!
-        personalitySkill(id: ID!): PersonalitySkill
+        personalities: [Personality]
+        personality(id: ID!): Personality
     }
 
     extend type Mutation {
-        createPersonalitySkill(artistId: ID!, funny: Int!, cuteness: Int!, charisma: Int!, outgoing: Int!, pleasant: Int!): PersonalitySkill!
-        updatePersonalitySkill(id: ID!, artistId: ID!, funny: Int!, cuteness: Int!, charisma: Int!, outgoing: Int!, pleasant: Int!, pityTimer: Int!): PersonalitySkill
-        deletePersonalitySkill(id: ID!): Boolean!
+        createPersonality(
+            artist_id: ID!, 
+            funny: Int!, 
+            cuteness: Int!, 
+            charisma: Int!, 
+            outgoing: Int!, 
+            pleasant: Int!
+        ): Personality!
+        
+        updatePersonality(
+            id: ID!, 
+            artist_id: ID!, 
+            funny: Int!, 
+            cuteness: Int!, 
+            charisma: Int!, 
+            outgoing: Int!, 
+            pleasant: Int!, 
+            pity_timer: Int!
+        ): Personality!
+        
+        deletePersonality(
+            id: ID!
+        ): Personality!
     }
     
-    type PersonalitySkill {
+    type Personality {
         id: ID!
         funny: Int!
         cuteness: Int!

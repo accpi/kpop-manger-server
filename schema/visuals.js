@@ -2,17 +2,37 @@ const { gql } = require('apollo-server-express')
 
 const schema = gql`
     extend type Query {
-        visualSkills: [VisualSkill]
-        visualSkill(id: ID!): VisualSkill
+        visuals: [Visuals]
+        visual(id: ID!): Visuals
     }
 
     extend type Mutation {
-        createVisualSkill(artist_id: ID!, pretty: Int!, sexy: Int!, cute: Int!, elegant: Int!, cool: Int!): VisualSkill!
-        updateVisualSkill(id: ID!, artist_id: ID!, pretty: Int!, sexy: Int!, cute: Int!, elegant: Int!, cool: Int!, pity_timer: Int!): VisualSkill
-        deleteVisualSkill(id: ID!): Boolean!
+        createVisual(
+            artist_id: ID!, 
+            pretty: Int!, 
+            sexy: Int!, 
+            cute: Int!, 
+            elegant: Int!, 
+            cool: Int!
+        ): Visuals!
+        
+        updateVisual(
+            id: ID!, 
+            artist_id: ID!, 
+            pretty: Int!, 
+            sexy: Int!, 
+            cute: Int!, 
+            elegant: Int!, 
+            cool: Int!, 
+            pity_timer: Int!
+        ): Visuals
+        
+        deleteVisual(
+            id: ID!
+        ): Visuals!
     }
     
-    type VisualSkill {
+    type Visuals {
         id: ID!
         pretty: Int!
         sexy: Int!
