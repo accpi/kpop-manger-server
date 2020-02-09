@@ -15,7 +15,9 @@ const schema = gql`
         updateGroup(
             id: ID!, 
             name: String!, 
-            fan_name: String!
+            fan_name: String!,
+            fans: Int!,
+            popularity: Int!
         ): Group
         
         deleteGroup(

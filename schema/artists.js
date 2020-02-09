@@ -13,7 +13,7 @@ const schema = gql`
             stage_name: String!, 
             birthday: String!, 
             sex: String!,
-            exp: Int!,
+            exp: Int,
             user_id: ID!,
             birthplace_id: ID!,
             group_id: ID
