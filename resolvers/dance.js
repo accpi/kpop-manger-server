@@ -45,8 +45,13 @@ const resolvers = {
         }),
     },
 
-    Album: {
-
+    Dance: {
+        artist: async (dance, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.find(artist => 
+                dance.artist_id === artist.id
+            )
+        },
     }
 }
 

@@ -46,7 +46,12 @@ const resolvers = {
     },
 
     Song: {
-
+        album: async (song, __, { dataSources }) => {
+            const albums = await dataSources.AlbumAPI.get()
+            return await albums.find(album => 
+                song.album_id === album.id
+            )
+        },
     }
 }
 

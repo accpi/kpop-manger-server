@@ -40,6 +40,7 @@ const schema = gql`
         flexibility: Int!
         strength: Int!
         pity_timer: Int!
+        artist: Artist!
     }
 `
 

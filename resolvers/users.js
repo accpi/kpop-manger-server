@@ -104,17 +104,26 @@ const resolvers = {
         }
     },
 
-    /*
     User: {
-        messages: async (user, args, { models }) => {
-            return await models.Message.findAll({
-                where: {
-                    userId: user.id,
-                }
-            })
-        }
+        artists: async (user, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.filter(artist => 
+                user.id === artist.user_id
+            )
+        },
+        groups: async (user, __, { dataSources }) => {
+            const groups = await dataSources.GroupAPI.get()
+            return await groups.filter(group => 
+                user.id === group.user_id
+            )
+        },
+        trainers: async (user, __, { dataSources }) => {
+            const trainers = await dataSources.TrainerAPI.get()
+            return await trainers.filter(trainer => 
+                user.id === trainer.user_id
+            )
+        },
     },
-    */
 }
 
 async function validatePassword(inputPass, storedPass) {

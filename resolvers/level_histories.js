@@ -69,8 +69,13 @@ const resolvers = {
         }),
     },
 
-    Group: {
-
+    LevelHistory: {
+        artist: async (levelHistory, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.find(artist => 
+                levelHistory.artist_id === artist.id
+            )
+        },
     }
 }
 

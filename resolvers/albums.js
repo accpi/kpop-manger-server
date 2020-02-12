@@ -46,7 +46,12 @@ const resolvers = {
     },
 
     Album: {
-
+        group: async (album, __, { dataSources }) => {
+            const groups = await dataSources.GroupAPI.get()
+            return await groups.find(group => 
+                album.group_id === group.id
+            )
+        },
     }
 }
 

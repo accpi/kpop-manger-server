@@ -46,7 +46,24 @@ const resolvers = {
     },
 
     Group: {
-
+        user: async (group, __, { dataSources }) => {
+            const users = await dataSources.UserAPI.get()
+            return await users.find(user => 
+                group.user_id === user.id
+            )
+        },
+        albums: async (group, __, { dataSources }) => {
+            const albums = await dataSources.AlbumAPI.get()
+            return await albums.filter(album => 
+                group.id === album.group_id
+            )
+        },
+        artists: async (group, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.filter(artist => 
+                group.id === artist.group_id
+            )
+        },
     }
 }
 

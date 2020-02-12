@@ -46,7 +46,12 @@ const resolvers = {
     },
 
     Trainer: {
-
+        user: async (trainer, __, { dataSources }) => {
+            const users = await dataSources.UserAPI.get()
+            return await users.find(user => 
+                trainer.user_id === user.id
+            )
+        },
     }
 }
 

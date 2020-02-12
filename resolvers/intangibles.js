@@ -45,8 +45,13 @@ const resolvers = {
         }),
     },
 
-    Group: {
-
+    Intangibles: {
+        artist: async (intangibles, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.find(artist => 
+                intangibles.artist_id === artist.id
+            )
+        },
     }
 }
 

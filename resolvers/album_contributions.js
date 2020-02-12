@@ -57,7 +57,18 @@ const resolvers = {
     },
 
     AlbumContribution: {
-
+        album: async (albumContribution, __, { dataSources }) => {
+            const albums = await dataSources.AlbumAPI.get()
+            return await albums.find(album => 
+                albumContribution.album_id === album.id
+            )
+        },
+        artist: async (albumContribution, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.find(artist => 
+                albumContribution.artist_id === artist.id
+            )
+        },
     }
 }
 

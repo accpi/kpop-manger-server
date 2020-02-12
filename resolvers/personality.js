@@ -46,7 +46,12 @@ const resolvers = {
     },
 
     Personality: {
-
+        artist: async (personality, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.find(artist => 
+                personality.artist_id === artist.id
+            )
+        },
     }
 }
 

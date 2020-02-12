@@ -46,7 +46,12 @@ const resolvers = {
     },
 
     Vocals: {
-
+        artist: async (vocals, __, { dataSources }) => {
+            const artists = await dataSources.ArtistAPI.get()
+            return await artists.find(artist => 
+                vocals.artist_id === artist.id
+            )
+        },
     }
 }
 
