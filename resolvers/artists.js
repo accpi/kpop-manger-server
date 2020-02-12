@@ -52,6 +52,12 @@ const resolvers = {
                 artist.user_id === user.id
             )
         },
+        group: async (artist, __, { dataSources }) => {
+            const groups = await dataSources.GroupAPI.get()
+            return await groups.find(group => 
+                artist.group_id === group.id
+            )
+        },
         vocals: async (artist, __, { dataSources }) => {
             const vocals = await dataSources.VocalAPI.get()
             return await vocals.find(vocal => 

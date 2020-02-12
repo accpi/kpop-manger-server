@@ -52,6 +52,12 @@ const resolvers = {
                 album.group_id === group.id
             )
         },
+        songs: async (album, __, { dataSources }) => {
+            const songs = await dataSources.SongAPI.get()
+            return await songs.filter(song => 
+                album.id === song.album_id
+            )
+        },
     }
 }
 

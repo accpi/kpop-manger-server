@@ -54,6 +54,7 @@ const schema = gql`
         level_histories: [LevelHistory]
         album_contributions: [AlbumContribution]
         user: User!
+        group: Group
     }
 `
 

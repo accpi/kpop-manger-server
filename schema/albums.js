@@ -33,6 +33,7 @@ const schema = gql`
         genre: String!
         style: String!
         group: Group!
+        songs: [Song]
     }
 `
 
