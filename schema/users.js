@@ -39,11 +39,6 @@ const schema = gql`
         first_name: String!
         last_name: String!
         role: String!
-        visuals: Visuals
-        vocals: Vocals
-        personality: Personality
-        dance: Dance
-        intangibles: Intangibles
         artists: [Artist]
         groups: [Group]
         trainers: [Trainer]
