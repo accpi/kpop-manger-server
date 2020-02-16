@@ -27,7 +27,7 @@ const resolvers = {
             { id, artist_id, funny, cuteness, charisma, outgoing, pleasant, pity_timer },
             { dataSources },
         ) => {
-            return await dataSources.PersonalityAPI.post({
+            return await dataSources.PersonalityAPI.update({
                 id, artist_id, funny, cuteness, charisma, outgoing, pleasant, pity_timer
             })
         },

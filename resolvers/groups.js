@@ -27,7 +27,7 @@ const resolvers = {
             { id, name, fan_name, fans, popularity },
             { dataSources },
         ) => {
-            return await dataSources.GroupAPI.post({
+            return await dataSources.GroupAPI.update({
                 id, name, fan_name, fans, popularity
             })
         },

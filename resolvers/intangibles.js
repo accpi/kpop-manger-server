@@ -27,7 +27,7 @@ const resolvers = {
             { id, artist_id, stamina, morale, songwriting, composition, choreography, pity_timer },
             { dataSources },
         ) => {
-            return await dataSources.IntangibleAPI.post({
+            return await dataSources.IntangibleAPI.update({
                 id, artist_id, stamina, morale, songwriting, composition, choreography, pity_timer
             })
         },

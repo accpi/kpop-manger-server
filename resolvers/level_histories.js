@@ -46,7 +46,7 @@ const resolvers = {
             },
             { dataSources },
         ) => {
-            return await dataSources.LevelHistoryAPI.post({
+            return await dataSources.LevelHistoryAPI.update({
                 id, artist_id, level, 
                 pretty, sexy, cute, elegant, cool,
                 breathing, diction, range, control, empathy,

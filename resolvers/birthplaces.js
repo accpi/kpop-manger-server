@@ -27,7 +27,7 @@ const resolvers = {
             { id, country, city },
             { dataSources },
         ) => {
-            return await dataSources.BirthplaceAPI.post({
+            return await dataSources.BirthplaceAPI.update({
                 id, country, city
             })
         },

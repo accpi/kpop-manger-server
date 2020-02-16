@@ -27,7 +27,7 @@ const resolvers = {
             { id, artist_id, breathing, diction, range, control, empathy, pity_timer },
             { dataSources },
         ) => {
-            return await dataSources.VocalAPI.post({
+            return await dataSources.VocalAPI.update({
                 id, artist_id, breathing, diction, range, control, empathy, pity_timer
             })
         },

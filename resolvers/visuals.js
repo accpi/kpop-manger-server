@@ -27,7 +27,7 @@ const resolvers = {
             { id, artist_id, pretty, sexy, cute, elegant, cool, pity_timer },
             { dataSources },
         ) => {
-            return await dataSources.VisualAPI.post({
+            return await dataSources.VisualAPI.update({
                 id, artist_id, pretty, sexy, cute, elegant, cool, pity_timer
             })
         },

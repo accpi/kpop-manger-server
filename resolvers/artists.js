@@ -27,7 +27,7 @@ const resolvers = {
             { id, first_name, last_name, stage_name, birthday, sex, exp, user_id, birthplace_id, group_id  },
             { dataSources },
         ) => {
-            return await dataSources.ArtistAPI.post({
+            return await dataSources.ArtistAPI.update({
                 id, first_name, last_name, stage_name, birthday, sex, exp, user_id, birthplace_id, group_id 
             })
         },
@@ -98,6 +98,12 @@ const resolvers = {
             const albumContributions = await dataSources.AlbumContributionAPI.get()
             return await albumContributions.filter(albumContribution => 
                 artist.id === albumContribution.artist_id
+            )
+        },
+        birthplace: async (artist, __, { dataSources }) => {
+            const birthplaces = await dataSources.BirthplaceAPI.get()
+            return await birthplaces.find(birthplace => 
+                artist.birthplace_id === birthplace.id
             )
         },
     }

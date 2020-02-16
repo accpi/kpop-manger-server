@@ -44,7 +44,7 @@ class API {
                 `, 
                 [first_name, last_name, stage_name, birthday, sex, exp, user_id, birthplace_id, group_id]
             )
-            
+
             return result.rows
                     ? result.rows[0]
                     : []

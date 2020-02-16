@@ -32,7 +32,7 @@ const resolvers = {
             { id, artist_id, album_id, visuals, vocals, dance, personality },
             { dataSources },
         ) => {
-            return await dataSources.AlbumContributionAPI.post({
+            return await dataSources.AlbumContributionAPI.update({
                 id,
                 artist_id, 
                 album_id, 

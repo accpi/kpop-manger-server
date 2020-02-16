@@ -27,7 +27,7 @@ const resolvers = {
             { id, first_name, last_name, dance, vocals, personality, visuals },
             { dataSources },
         ) => {
-            return await dataSources.TrainerAPI.post({
+            return await dataSources.TrainerAPI.update({
                 id, first_name, last_name, dance, vocals, personality, visuals
             })
         },

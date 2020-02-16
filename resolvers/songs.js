@@ -27,7 +27,7 @@ const resolvers = {
             { id, name, album_id },
             { dataSources },
         ) => {
-            return await dataSources.SongAPI.post({
+            return await dataSources.SongAPI.update({
                 id, name, album_id
             })
         },

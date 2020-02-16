@@ -27,7 +27,7 @@ const resolvers = {
             { id, artist_id, balance, posture, coordination, flexibility, strength, pity_timer },
             { dataSources },
         ) => {
-            return await dataSources.DanceAPI.post({
+            return await dataSources.DanceAPI.update({
                 id, artist_id, balance, posture, coordination, flexibility, strength, pity_timer
             })
         },
