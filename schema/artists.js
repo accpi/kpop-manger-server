@@ -16,7 +16,8 @@ const schema = gql`
             exp: Int,
             user_id: ID!,
             birthplace_id: ID!,
-            group_id: ID
+            group_id: ID,
+            level: Int
         ): Artist!
 
         updateArtist(

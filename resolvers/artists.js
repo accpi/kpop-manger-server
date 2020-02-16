@@ -14,12 +14,34 @@ const resolvers = {
     Mutation: {
         createArtist: async (
             _,
-            { first_name, last_name, stage_name, birthday, sex, exp, user_id, birthplace_id, group_id },
+            { first_name, last_name, stage_name, birthday, sex, exp, user_id, birthplace_id, group_id, level },
             { dataSources },
         ) => {
-            return await dataSources.ArtistAPI.post({
+            const artist = await dataSources.ArtistAPI.post({
                 first_name, last_name, stage_name, birthday, sex, exp, user_id, birthplace_id, group_id
             })
+
+            const artist_level = 0
+            if (level) {
+                artist_level = level
+            }
+
+            const vocals = await dataSources.VocalAPI.generateNew({ artist_id: artist.id, level: artist_level })
+            const visuals = await dataSources.VisualAPI.generateNew({ artist_id: artist.id, level: artist_level })
+            const dance = await dataSources.DanceAPI.generateNew({ artist_id: artist.id, level: artist_level })
+            const personality = await dataSources.PersonalityAPI.generateNew({ artist_id: artist.id, level: artist_level })
+            const intangbiles = await dataSources.IntangibleAPI.generateNew({ artist_id: artist.id, level: artist_level })
+            
+            console.log({
+                artist: artist,
+                vocals: vocals,
+                visuals: visuals,
+                dance: dance,
+                personality: personality,
+                intangibles: intangbiles
+            })
+            
+            return artist
         },
 
         updateArtist: async (

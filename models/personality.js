@@ -90,6 +90,18 @@ class API {
             console.log(error.stack)
         }
     }
+
+    async generateNew({artist_id, level}) {
+        const vocals = await this.post({
+            artist_id: artist_id,
+            funny: 0,
+            cuteness: 0,
+            charisma: 0,
+            outgoing: 0,
+            pleasant: 0
+        })
+        return vocals
+    }
 }
 
 module.exports = API
